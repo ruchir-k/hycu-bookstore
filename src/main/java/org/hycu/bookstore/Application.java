@@ -2,6 +2,8 @@ package org.hycu.bookstore;
 
 import org.hycu.bookstore.service.AddNewBookService;
 import org.hycu.bookstore.service.DisplayAllAvailableBooksService;
+import org.hycu.bookstore.service.DisplayAllRegisteredUsersService;
+import org.hycu.bookstore.service.RegisterNewUserService;
 
 import java.util.Scanner;
 
@@ -84,10 +86,12 @@ public class Application {
 
             switch (option) {
                 case 1:
-                    System.out.println("Register New User");
+                    RegisterNewUserService registerNewUserService = new RegisterNewUserService();
+                    registerNewUserService.invoke();
                     break;
                 case 2:
-                    System.out.println("View All Users");
+                    DisplayAllRegisteredUsersService displayAllRegisteredUsersService = new DisplayAllRegisteredUsersService();
+                    displayAllRegisteredUsersService.invoke();
                     break;
                 case 3:
                     System.out.println("Going back to main menu...");
