@@ -3,15 +3,16 @@ package org.hycu.bookstore.data.inmemory.repos;
 import org.hycu.bookstore.domain.entities.Book;
 import org.hycu.bookstore.domain.repos.BookRepo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class InMemoryBookRepo implements BookRepo {
 
     /**
-     * Book data is stored in a list.
+     * In-memory storage for books.
      */
-    List<Book> books = new ArrayList<>();
+    HashMap<Integer, Book> books = new HashMap<>();
+
+    Integer uniqueBookId = 1;
 
     /**
      * Singleton instance.
@@ -35,12 +36,16 @@ public class InMemoryBookRepo implements BookRepo {
 
     @Override
     public void addBook(Book book) {
-        books.add(book);
+        books.put(book.getBookId(), book);
+        uniqueBookId++;
     }
 
     @Override
-    public List<Book> getAvailableBooks() {
+    public HashMap<Integer, Book> getAvailableBooks() {
         return books;
     }
 
+    public Integer getUniqueBookId() {
+        return uniqueBookId;
+    }
 }

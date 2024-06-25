@@ -7,7 +7,7 @@ public class RegisterNewUser {
     public void invoke(String username, String password) {
         InMemoryUserRepo inMemoryUserRepo = InMemoryUserRepo.getInstance();
         User newUser = new User(
-                inMemoryUserRepo.listRegisteredUsers().size() + 1,
+                inMemoryUserRepo.getUniqueUserId(),
                 username,
                 password
         );

@@ -3,15 +3,16 @@ package org.hycu.bookstore.data.inmemory.repos;
 import org.hycu.bookstore.domain.entities.User;
 import org.hycu.bookstore.domain.repos.UserRepo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class InMemoryUserRepo implements UserRepo {
 
     /**
-     * User data is stored in a list.
+     * In-memory storage for users.
      */
-    private List<User> users = new ArrayList<>();
+    HashMap<Integer, User> users = new HashMap<>();
+
+    Integer uniqueUserId = 1;
 
     /**
      * Singleton instance.
@@ -35,12 +36,16 @@ public class InMemoryUserRepo implements UserRepo {
 
     @Override
     public void registerUser(User user) {
-        users.add(user);
+        users.put(user.getUserId(), user);
+        uniqueUserId++;
     }
 
     @Override
-    public List<User> listRegisteredUsers() {
+    public HashMap<Integer, User> getRegisteredUsers() {
         return users;
     }
 
+    public Integer getUniqueUserId() {
+        return uniqueUserId;
+    }
 }

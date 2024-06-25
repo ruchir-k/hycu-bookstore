@@ -7,7 +7,7 @@ public class AddNewBook {
     public void invoke(String title, String author, int price, int numOfCopies) {
         InMemoryBookRepo inMemoryBookRepo = InMemoryBookRepo.getInstance();
         Book newBook = new Book(
-                inMemoryBookRepo.getAvailableBooks().size() + 1,
+                inMemoryBookRepo.getUniqueBookId(),
                 title,
                 author,
                 price,
