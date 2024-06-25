@@ -38,4 +38,13 @@ public class Book {
     public void setNumOfCopies(int numOfCopies) {
         this.numOfCopies = numOfCopies;
     }
+
+    @Override
+    public String toString() {
+        return "Book ID: " + bookId + "\n" +
+                "Title: " + title + "\n" +
+                "Author: " + author + "\n" +
+                "Price: " + price + "\n" +
+                "Number of copies: " + numOfCopies + "\n";
+    }
 }
