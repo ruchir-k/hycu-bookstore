@@ -13,12 +13,13 @@ public class Application {
         System.out.println("Welcome to the Bookstore!");
 
         int option = 0;
-        while (option != 4) {
+        while (option != 5) {
 
             System.out.println("1. Book Management");
             System.out.println("2. User Management");
             System.out.println("3. Order Management");
-            System.out.println("4. Exit");
+            System.out.println("4. View All Orders");
+            System.out.println("5. Exit");
             System.out.println("Please select an option:");
             option = scanner.nextInt();
 
@@ -33,6 +34,9 @@ public class Application {
                     orderManagement();
                     break;
                 case 4:
+                    viewAllOrders();
+                    break;
+                case 5:
                     System.out.println("Exiting the application...");
                     break;
                 default:
@@ -138,5 +142,10 @@ public class Application {
                     break;
             }
         }
+    }
+
+    private void viewAllOrders() {
+        ViewAllOrdersService viewAllOrdersService = new ViewAllOrdersService();
+        viewAllOrdersService.invoke();
     }
 }

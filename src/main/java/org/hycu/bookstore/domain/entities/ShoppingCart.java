@@ -21,4 +21,13 @@ public class ShoppingCart {
     public void  addBook(Book book) {
         this.books.add(book);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Book book : books) {
+            sb.append(book.toString());
+        }
+        return sb.toString();
+    }
 }

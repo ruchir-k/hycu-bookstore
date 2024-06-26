@@ -6,6 +6,10 @@ public class PlaceOrder {
     public void invoke() {
         System.out.println("Order placed successfully. Shopping cart reset.");
         InMemoryShoppingCartRepo inMemoryShoppingCartRepo = InMemoryShoppingCartRepo.getInstance();
+
+        SaveOrder saveOrder = new SaveOrder();
+        saveOrder.invoke(inMemoryShoppingCartRepo.getShoppingCart());
+
         inMemoryShoppingCartRepo.clearShoppingCart();
     }
 }
