@@ -19,6 +19,10 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+tasks.withType<JavaExec>() {
+    standardInput = System.`in`
+}
+
 tasks.test {
     useJUnitPlatform()
 }

@@ -1,18 +1,13 @@
 package org.hycu.bookstore.domain.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCart {
-    private final int userId;
     private List<Book> books;
 
-    public ShoppingCart(int userId, List<Book> books) {
-        this.userId = userId;
-        this.books = books;
-    }
-
-    public int getUserId() {
-        return userId;
+    public ShoppingCart(List<Book> books) {
+        this.books = new ArrayList<>(books);
     }
 
     public List<Book> getBooks() {

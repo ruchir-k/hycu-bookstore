@@ -1,9 +1,8 @@
 package org.hycu.bookstore;
 
-import org.hycu.bookstore.service.AddNewBookService;
-import org.hycu.bookstore.service.DisplayAllAvailableBooksService;
-import org.hycu.bookstore.service.DisplayAllRegisteredUsersService;
-import org.hycu.bookstore.service.RegisterNewUserService;
+import org.hycu.bookstore.domain.usecases.CalculateTotalShoppingCartValue;
+import org.hycu.bookstore.domain.usecases.PlaceOrder;
+import org.hycu.bookstore.service.*;
 
 import java.util.Scanner;
 
@@ -30,9 +29,9 @@ public class Application {
                 case 2:
                     userManagement();
                     break;
-//                case 3:
-//                    orderManagement();
-//                    break;
+                case 3:
+                    orderManagement();
+                    break;
                 case 4:
                     System.out.println("Exiting the application...");
                     break;
@@ -103,5 +102,41 @@ public class Application {
         }
     }
 
+    private void orderManagement() {
+        System.out.println("Order Management");
 
+        int option = 0;
+        while (option != 4) {
+            System.out.println("1. Add Book to Shopping Cart");
+            System.out.println("2. Calculate Total Shopping Cart Value");
+            System.out.println("3. Place Order");
+            System.out.println("4. Go Back");
+            System.out.println("Please select an option:");
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    AddBookToShoppingCartService addBookToShoppingCartService = new AddBookToShoppingCartService();
+                    addBookToShoppingCartService.invoke();
+                    break;
+                case 2:
+                    CalculateTotalShoppingCartValue calculateTotalShoppingCartValue = new CalculateTotalShoppingCartValue();
+                    calculateTotalShoppingCartValue.invoke();
+                    break;
+                case 3:
+                    PlaceOrder placeOrder = new PlaceOrder();
+                    placeOrder.invoke();
+                    break;
+                case 4:
+                    ClearShoppingCartService clearShoppingCartService = new ClearShoppingCartService();
+                    clearShoppingCartService.invoke();
+                    System.out.println("Shopping cart cleared successfully.");
+                    System.out.println("Going back to main menu...");
+                    break;
+                default:
+                    System.out.println("Invalid option. Please select a valid option.");
+                    break;
+            }
+        }
+    }
 }

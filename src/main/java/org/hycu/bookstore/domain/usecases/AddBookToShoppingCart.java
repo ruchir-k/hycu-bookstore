@@ -6,7 +6,7 @@ import org.hycu.bookstore.domain.entities.Book;
 import org.hycu.bookstore.domain.entities.ShoppingCart;
 
 public class AddBookToShoppingCart {
-    public void invoke(int bookId, int userId, int quantity) {
+    public void invoke(int bookId, int quantity) {
         InMemoryBookRepo inMemoryBookRepo = InMemoryBookRepo.getInstance();
         InMemoryShoppingCartRepo inMemoryShoppingCartRepo = InMemoryShoppingCartRepo.getInstance();
 
@@ -22,13 +22,21 @@ public class AddBookToShoppingCart {
 
             if(currBook.getNumOfCopies() >= quantity){
                 // Update the number of copies of the book in the InMemoryBookRepo
-                inMemoryBookRepo.getAvailableBooks().get(bookId).setNumOfCopies(currBook.getNumOfCopies() - quantity);
+                currBook.setNumOfCopies(currBook.getNumOfCopies() - quantity);
+
                 // Update the number of copies of the book in the shopping cart
-                currBook.setNumOfCopies(quantity);
-                shoppingCart.addBook(currBook);
+                Book addBookToCart = new Book(
+                        currBook.getBookId(),
+                        currBook.getTitle(),
+                        currBook.getAuthor(),
+                        currBook.getPrice(),
+                        quantity
+                );
+                shoppingCart.addBook(addBookToCart);
                 inMemoryShoppingCartRepo.upsertShoppingCart(shoppingCart);
 
-                System.out.println("Book added to shopping cart successfully.");
+                System.out.println("Successfully added "+ quantity +" copies of " +
+                        currBook.getTitle() + "by" + currBook.getAuthor() +" to shopping cart successfully.");
 
             } else {
                 System.out.println("Not enough copies available.");

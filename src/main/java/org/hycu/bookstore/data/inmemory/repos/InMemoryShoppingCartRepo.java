@@ -3,12 +3,14 @@ package org.hycu.bookstore.data.inmemory.repos;
 import org.hycu.bookstore.domain.entities.ShoppingCart;
 import org.hycu.bookstore.domain.repos.ShoppingCartRepo;
 
+import java.util.List;
+
 public class InMemoryShoppingCartRepo implements ShoppingCartRepo {
 
     /**
      * Shopping cart object
      */
-    ShoppingCart shoppingCart;
+    ShoppingCart shoppingCart = new ShoppingCart(List.of());
 
     /**
      * Singleton instance.
@@ -42,6 +44,6 @@ public class InMemoryShoppingCartRepo implements ShoppingCartRepo {
 
     @Override
     public void clearShoppingCart() {
-        shoppingCart = null;
+        shoppingCart = new ShoppingCart(List.of());
     }
 }
