@@ -4,6 +4,7 @@ import org.hycu.bookstore.domain.usecases.CalculateTotalShoppingCartValue;
 import org.hycu.bookstore.domain.usecases.PlaceOrder;
 import org.hycu.bookstore.service.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -15,13 +16,20 @@ public class Application {
         int option = 0;
         while (option != 5) {
 
-            System.out.println("1. Book Management");
-            System.out.println("2. User Management");
-            System.out.println("3. Order Management");
-            System.out.println("4. View All Orders");
-            System.out.println("5. Exit");
-            System.out.println("Please select an option:");
-            option = scanner.nextInt();
+            try {
+                System.out.println("1. Book Management");
+                System.out.println("2. User Management");
+                System.out.println("3. Order Management");
+                System.out.println("4. View All Orders");
+                System.out.println("5. Exit");
+                System.out.println("Please select an option:");
+                option = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                continue;
+            }
+
 
             switch (option) {
                 case 1:
@@ -51,11 +59,18 @@ public class Application {
 
         int option = 0;
         while (option != 3) {
-            System.out.println("1. Add New Book");
-            System.out.println("2. View All Books");
-            System.out.println("3. Go Back");
-            System.out.println("Please select an option:");
-            option = scanner.nextInt();
+
+            try {
+                System.out.println("1. Add New Book");
+                System.out.println("2. View All Books");
+                System.out.println("3. Go Back");
+                System.out.println("Please select an option:");
+                option = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -81,11 +96,18 @@ public class Application {
 
         int option = 0;
         while (option != 3) {
-            System.out.println("1. Register New User");
-            System.out.println("2. View All Users");
-            System.out.println("3. Go Back");
-            System.out.println("Please select an option:");
-            option = scanner.nextInt();
+
+            try {
+                System.out.println("1. Register New User");
+                System.out.println("2. View All Users");
+                System.out.println("3. Go Back");
+                System.out.println("Please select an option:");
+                option = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -109,14 +131,28 @@ public class Application {
     private void orderManagement() {
         System.out.println("Order Management");
 
+        VerifyUserService verifyUserService = new VerifyUserService();
+        int verifiedUserId = verifyUserService.verify();
+        if (verifiedUserId == -1) {
+            System.out.println("User not verified. Please verify user to proceed.");
+            return;
+        }
+
         int option = 0;
         while (option != 4) {
-            System.out.println("1. Add Book to Shopping Cart");
-            System.out.println("2. Calculate Total Shopping Cart Value");
-            System.out.println("3. Place Order");
-            System.out.println("4. Go Back");
-            System.out.println("Please select an option:");
-            option = scanner.nextInt();
+
+            try {
+                System.out.println("1. Add Book to Shopping Cart");
+                System.out.println("2. Calculate Total Shopping Cart Value");
+                System.out.println("3. Place Order");
+                System.out.println("4. Go Back");
+                System.out.println("Please select an option:");
+                option = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                continue;
+            }
 
             switch (option) {
                 case 1:
@@ -142,6 +178,10 @@ public class Application {
                     break;
             }
         }
+
+        // To clear the userId from the shopping cart
+        ClearShoppingCartService clearShoppingCartService = new ClearShoppingCartService();
+        clearShoppingCartService.invoke();
     }
 
     private void viewAllOrders() {
