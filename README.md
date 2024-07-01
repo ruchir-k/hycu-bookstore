@@ -53,6 +53,7 @@ Designed a basic bookstore in Java, follwing domain driven design. It includes f
                     │       ├── PlaceOrder.java
                     │       ├── RegisterNewUser.java
                     │       ├── SaveOrder.java
+                    │       ├── VerifyUser.java
                     │       └── ViewAllOrders.java
                     ├── exceptions
                     │   └── InvalidInputException.java
@@ -65,6 +66,7 @@ Designed a basic bookstore in Java, follwing domain driven design. It includes f
                         ├── DisplayAllRegisteredUsersService.java
                         ├── PlaceOrderService.java
                         ├── RegisterNewUserService.java
+                        ├── VerifyUserService.java
                         └── ViewAllOrdersService.java
 ```
 
